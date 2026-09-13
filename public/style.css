@@ -1,0 +1,420 @@
+@font-face {
+  font-family: "Quando";
+  src: url("/fonts/quando.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Alegreya";
+  src: url("/fonts/alegreya-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --ground: #0a120e;
+  --ink: #f2ecd9;
+  --ink-soft: rgba(242, 236, 217, 0.72);
+  --ink-faint: rgba(242, 236, 217, 0.5);
+  --warm: #f0e2b4;
+  --line: rgba(242, 236, 217, 0.16);
+  --display: "Quando", Georgia, "Times New Roman", serif;
+  --body: "Alegreya", Georgia, serif;
+  --moss: 52, 118, 82;
+  --lake: 30, 92, 104;
+  --amber: 150, 112, 44;
+  --violet: 92, 70, 140;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ground);
+  color: var(--ink);
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background: slow mist drifting over a forest floor, faint light
+   rays from the top left. Only transforms animate, so each blurred
+   layer rasterises once and the effect stays cheap. */
+
+.sky {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  background:
+    radial-gradient(
+      120% 70% at 50% 115%,
+      rgba(var(--moss), 0.32),
+      transparent 60%
+    ),
+    var(--ground);
+}
+
+.mist {
+  position: absolute;
+  width: 72vmax;
+  height: 72vmax;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.6;
+  will-change: transform;
+  animation: drift 80s ease-in-out infinite alternate;
+}
+
+.mist-a {
+  left: -22vmax;
+  top: -32vmax;
+  background: radial-gradient(
+    closest-side,
+    rgba(var(--moss), 0.95),
+    transparent
+  );
+}
+
+.mist-b {
+  right: -28vmax;
+  top: 6vmax;
+  background: radial-gradient(
+    closest-side,
+    rgba(var(--lake), 0.85),
+    transparent
+  );
+  animation-duration: 100s;
+  animation-delay: -35s;
+}
+
+.mist-c {
+  left: 18vmax;
+  bottom: -44vmax;
+  background: radial-gradient(
+    closest-side,
+    rgba(var(--amber), 0.7),
+    transparent
+  );
+  animation-duration: 120s;
+  animation-delay: -70s;
+}
+
+.rays {
+  position: absolute;
+  inset: -40% -30%;
+  transform-origin: 18% 0%;
+  background:
+    repeating-conic-gradient(
+      from 196deg at 18% -12%,
+      transparent 0deg 8deg,
+      rgba(240, 226, 180, 0.05) 10deg,
+      transparent 13deg 23deg
+    ),
+    repeating-conic-gradient(
+      from 190deg at 18% -12%,
+      transparent 0deg 14deg,
+      rgba(240, 226, 180, 0.035) 17deg,
+      transparent 20deg 37deg
+    );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9) 25%,
+    transparent 75%
+  );
+  will-change: transform;
+  animation: sway 46s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(9vmax, -7vmax, 0) scale(1.14);
+  }
+  to {
+    transform: translate3d(-7vmax, 9vmax, 0) scale(0.94);
+  }
+}
+
+@keyframes sway {
+  from {
+    transform: rotate(-2.4deg);
+  }
+  to {
+    transform: rotate(2.4deg);
+  }
+}
+
+/* Aurora variant (?fx=aurora): skewed curtains sliding sideways. */
+
+.curtain {
+  display: none;
+  position: absolute;
+  top: -20%;
+  height: 90%;
+  width: 34vmax;
+  filter: blur(46px);
+  opacity: 0.55;
+  transform: skewX(-18deg);
+  will-change: transform;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.9) 30%,
+    transparent 85%
+  );
+  animation: slide 60s ease-in-out infinite alternate;
+}
+
+.curtain-a {
+  left: 4%;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--moss), 0.9),
+    rgba(var(--lake), 0.6)
+  );
+}
+
+.curtain-b {
+  left: 36%;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--lake), 0.9),
+    rgba(var(--violet), 0.55)
+  );
+  animation-duration: 75s;
+  animation-delay: -25s;
+}
+
+.curtain-c {
+  left: 64%;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--violet), 0.7),
+    rgba(var(--moss), 0.5)
+  );
+  animation-duration: 90s;
+  animation-delay: -50s;
+}
+
+@keyframes slide {
+  from {
+    transform: skewX(-18deg) translate3d(-8vmax, 0, 0) scaleY(1);
+  }
+  50% {
+    transform: skewX(-14deg) translate3d(6vmax, 2vmax, 0) scaleY(1.08);
+  }
+  to {
+    transform: skewX(-20deg) translate3d(10vmax, -1vmax, 0) scaleY(0.96);
+  }
+}
+
+html[data-fx="aurora"] .mist,
+html[data-fx="aurora"] .rays,
+html[data-fx="off"] .sky > * {
+  display: none;
+}
+
+html[data-fx="aurora"] .curtain {
+  display: block;
+}
+
+/* Layout */
+
+.page {
+  max-width: 40rem;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: clamp(2rem, 8vh, 6rem) clamp(1.25rem, 5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.page-doc {
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.mark {
+  margin: 0 0 1.1rem;
+  font-family: var(--display);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.mark a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tagline {
+  margin: 0 0 1.25rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.3rem + 3.2vw, 3.5rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.contact h2,
+.page-doc h2 {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.contact p {
+  margin: 0;
+}
+
+.mail {
+  font-family: var(--display);
+  font-size: clamp(1.2rem, 1rem + 1.2vw, 1.65rem);
+  color: var(--warm);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.4s ease;
+}
+
+.mail:hover,
+.mail:focus-visible {
+  border-color: var(--warm);
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
+  color: var(--ink-faint);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer a,
+.page-doc a {
+  color: var(--ink-soft);
+  text-decoration-color: var(--line);
+  text-underline-offset: 0.2em;
+  transition: color 0.3s ease;
+}
+
+.site-footer a:hover,
+.page-doc a:hover {
+  color: var(--warm);
+}
+
+/* Document pages */
+
+.page-doc h1 {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.page-doc .updated {
+  margin: 0;
+  color: var(--ink-faint);
+  font-size: 0.92rem;
+}
+
+.page-doc section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.page-doc p,
+.page-doc ul {
+  margin: 0;
+}
+
+.page-doc ul {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.page-doc li::marker {
+  color: var(--ink-faint);
+}
+
+/* Entrance */
+
+.hero > *,
+.contact,
+.site-footer {
+  animation: rise 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero > :nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.hero > :nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.contact {
+  animation-delay: 0.4s;
+}
+
+.site-footer {
+  animation-delay: 0.55s;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mist,
+  .rays,
+  .curtain,
+  .hero > *,
+  .contact,
+  .site-footer {
+    animation: none;
+  }
+}

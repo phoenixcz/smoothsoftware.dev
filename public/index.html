@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smooth Software</title>
+    <meta
+      name="description"
+      content="Smooth Software is a small independent studio in the Czech Republic making calm games for the browser."
+    />
+    <meta name="theme-color" content="#0a120e" />
+    <link rel="canonical" href="https://smoothsoftware.dev/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/quando.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <script>
+      const fx = new URLSearchParams(location.search).get('fx');
+      if (fx) document.documentElement.dataset.fx = fx;
+    </script>
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true">
+      <div class="mist mist-a"></div>
+      <div class="mist mist-b"></div>
+      <div class="mist mist-c"></div>
+      <div class="rays"></div>
+      <div class="curtain curtain-a"></div>
+      <div class="curtain curtain-b"></div>
+      <div class="curtain curtain-c"></div>
+    </div>
+    <main class="page">
+      <header class="hero">
+        <p class="mark">Smooth Software</p>
+        <h1 class="tagline">Calm games for the browser.</h1>
+        <p class="lede">
+          A small independent studio in the Czech Republic, making games
+          you play to unwind. No clocks, no leaderboards, no pressure.
+          Our first title, a solitaire set in living nature, is on its way
+          to web game portals.
+        </p>
+      </header>
+      <section class="contact">
+        <h2>Say hello</h2>
+        <p>
+          <a class="mail" href="mailto:hello@smoothsoftware.dev"
+            >hello@smoothsoftware.dev</a
+          >
+        </p>
+      </section>
+      <footer class="site-footer">
+        <p>Smooth Software is the trading name of Martin Hladký, Czech Republic.</p>
+        <p><a href="/privacy">Privacy policy</a></p>
+      </footer>
+    </main>
+  </body>
+</html>
