@@ -54,8 +54,6 @@ body {
 .sky {
   --lean-x: 0;
   --lean-y: 0;
-  --light-x: 50vw;
-  --light-y: 40vh;
   position: fixed;
   inset: 0;
   overflow: hidden;
@@ -142,26 +140,6 @@ body {
   );
   will-change: transform;
   animation: sway 46s ease-in-out infinite alternate;
-}
-
-/* Warm light that follows the pointer (sky.js moves --light-x/y). */
-
-.light {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 70vmax;
-  height: 70vmax;
-  border-radius: 50%;
-  background: radial-gradient(
-    closest-side,
-    rgba(240, 226, 180, 0.11),
-    rgba(240, 226, 180, 0.04) 45%,
-    transparent 70%
-  );
-  translate: calc(var(--light-x) - 35vmax) calc(var(--light-y) - 35vmax);
-  will-change: translate;
-  pointer-events: none;
 }
 
 @keyframes drift {
@@ -256,12 +234,6 @@ html[data-fx="off"] .sky > * {
   display: none;
 }
 
-@media (pointer: coarse) {
-  .light {
-    display: none;
-  }
-}
-
 html[data-fx="aurora"] .curtain {
   display: block;
 }
@@ -328,13 +300,6 @@ html[data-fx="aurora"] .curtain {
   margin: 0;
 }
 
-.wish {
-  margin: 0;
-  font-family: var(--display);
-  font-size: 1.1rem;
-  color: var(--ink-soft);
-}
-
 .mail {
   font-family: var(--display);
   font-size: clamp(1.2rem, 1rem + 1.2vw, 1.65rem);
@@ -350,12 +315,6 @@ html[data-fx="aurora"] .curtain {
 }
 
 .site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
   font-size: 0.92rem;
   color: var(--ink-faint);
 }
@@ -419,7 +378,6 @@ html[data-fx="aurora"] .curtain {
 
 .hero > *,
 .contact,
-.wish,
 .site-footer {
   animation: rise 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -436,12 +394,8 @@ html[data-fx="aurora"] .curtain {
   animation-delay: 0.4s;
 }
 
-.wish {
-  animation-delay: 0.55s;
-}
-
 .site-footer {
-  animation-delay: 0.7s;
+  animation-delay: 0.55s;
 }
 
 @keyframes rise {
@@ -461,7 +415,6 @@ html[data-fx="aurora"] .curtain {
   .curtain,
   .hero > *,
   .contact,
-  .wish,
   .site-footer {
     animation: none;
   }
