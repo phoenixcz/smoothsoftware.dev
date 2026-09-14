@@ -51,18 +51,6 @@ body {
    rays from the top left. Only transforms animate, so each blurred
    layer rasterises once and the effect stays cheap. */
 
-@property --lean-x {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 0;
-}
-
-@property --lean-y {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 0;
-}
-
 .sky {
   --lean-x: 0;
   --lean-y: 0;
@@ -152,29 +140,6 @@ body {
   );
   will-change: transform;
   animation: sway 46s ease-in-out infinite alternate;
-}
-
-/* Without a pointer (phones, tablets) the lean wanders on its own. */
-
-@media (pointer: coarse) {
-  .sky {
-    animation: wander 36s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes wander {
-  from {
-    --lean-x: -1;
-    --lean-y: -0.7;
-  }
-  40% {
-    --lean-x: 0.6;
-    --lean-y: 0.2;
-  }
-  to {
-    --lean-x: 1;
-    --lean-y: 0.8;
-  }
 }
 
 @keyframes drift {
@@ -370,7 +335,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sky,
   .mist,
   .rays,
   .hero > *,

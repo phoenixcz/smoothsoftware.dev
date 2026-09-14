@@ -1,12 +1,18 @@
 // Pointer-reactive sky: the mist layers lean toward the cursor at
-// different depths, with inertia. Only two CSS variables change; the
-// ambient drift keeps running underneath. Touch devices and
-// reduced-motion readers keep the ambient sky only.
+// different depths, with inertia. Without a fine pointer (phones,
+// tablets) the lean wanders on its own instead. Only two CSS variables
+// change; the ambient drift keeps running underneath. Reduced-motion
+// readers keep the ambient sky only.
 const sky = document.querySelector(".sky");
 const finePointer = matchMedia("(pointer: fine)").matches;
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (sky && finePointer && !reducedMotion) {
+const setLean = (x, y) => {
+  sky.style.setProperty("--lean-x", x.toFixed(4));
+  sky.style.setProperty("--lean-y", y.toFixed(4));
+};
+
+const followPointer = () => {
   const ease = 0.04;
   let targetX = 0;
   let targetY = 0;
@@ -17,8 +23,7 @@ if (sky && finePointer && !reducedMotion) {
   const settle = () => {
     leanX += (targetX - leanX) * ease;
     leanY += (targetY - leanY) * ease;
-    sky.style.setProperty("--lean-x", leanX.toFixed(4));
-    sky.style.setProperty("--lean-y", leanY.toFixed(4));
+    setLean(leanX, leanY);
     const remaining = Math.abs(targetX - leanX) + Math.abs(targetY - leanY);
     frame = remaining > 0.002 ? requestAnimationFrame(settle) : 0;
   };
@@ -32,4 +37,21 @@ if (sky && finePointer && !reducedMotion) {
     },
     { passive: true },
   );
+};
+
+const wander = () => {
+  const start = performance.now();
+  const step = (now) => {
+    const t = (now - start) / 1000;
+    const x = 1.6 * Math.sin(t / 3.5) + 0.5 * Math.sin(t / 8.3);
+    const y = 1.2 * Math.cos(t / 4.7);
+    setLean(x, y);
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+};
+
+if (sky && !reducedMotion) {
+  if (finePointer) followPointer();
+  else wander();
 }
