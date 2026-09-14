@@ -163,81 +163,6 @@ body {
   }
 }
 
-/* Aurora variant (?fx=aurora): skewed curtains sliding sideways. */
-
-.curtain {
-  display: none;
-  position: absolute;
-  translate: calc(var(--lean-x) * 3vmax) calc(var(--lean-y) * 1.5vmax);
-  top: -20%;
-  height: 90%;
-  width: 34vmax;
-  filter: blur(46px);
-  opacity: 0.55;
-  transform: skewX(-18deg);
-  will-change: transform;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(0, 0, 0, 0.9) 30%,
-    transparent 85%
-  );
-  animation: slide 60s ease-in-out infinite alternate;
-}
-
-.curtain-a {
-  left: 4%;
-  background: linear-gradient(
-    to bottom,
-    rgba(var(--moss), 0.9),
-    rgba(var(--lake), 0.6)
-  );
-}
-
-.curtain-b {
-  left: 36%;
-  background: linear-gradient(
-    to bottom,
-    rgba(var(--lake), 0.9),
-    rgba(var(--violet), 0.55)
-  );
-  animation-duration: 75s;
-  animation-delay: -25s;
-}
-
-.curtain-c {
-  left: 64%;
-  background: linear-gradient(
-    to bottom,
-    rgba(var(--violet), 0.7),
-    rgba(var(--moss), 0.5)
-  );
-  animation-duration: 90s;
-  animation-delay: -50s;
-}
-
-@keyframes slide {
-  from {
-    transform: skewX(-18deg) translate3d(-8vmax, 0, 0) scaleY(1);
-  }
-  50% {
-    transform: skewX(-14deg) translate3d(6vmax, 2vmax, 0) scaleY(1.08);
-  }
-  to {
-    transform: skewX(-20deg) translate3d(10vmax, -1vmax, 0) scaleY(0.96);
-  }
-}
-
-html[data-fx="aurora"] .mist,
-html[data-fx="aurora"] .rays,
-html[data-fx="off"] .sky > * {
-  display: none;
-}
-
-html[data-fx="aurora"] .curtain {
-  display: block;
-}
-
 /* Layout */
 
 .page {
@@ -412,7 +337,6 @@ html[data-fx="aurora"] .curtain {
 @media (prefers-reduced-motion: reduce) {
   .mist,
   .rays,
-  .curtain,
   .hero > *,
   .contact,
   .site-footer {

@@ -19,10 +19,6 @@
       crossorigin
     />
     <link rel="stylesheet" href="/style.css" />
-    <script>
-      const fx = new URLSearchParams(location.search).get('fx');
-      if (fx) document.documentElement.dataset.fx = fx;
-    </script>
   </head>
   <body>
     <div class="sky" aria-hidden="true">
@@ -30,9 +26,6 @@
       <div class="mist mist-b"></div>
       <div class="mist mist-c"></div>
       <div class="rays"></div>
-      <div class="curtain curtain-a"></div>
-      <div class="curtain curtain-b"></div>
-      <div class="curtain curtain-c"></div>
     </div>
     <main class="page">
       <header class="hero">

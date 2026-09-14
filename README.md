@@ -2,8 +2,7 @@
 
 The studio page of Smooth Software: contact and privacy policy. Static
 HTML and CSS, no build step. The only JavaScript is `sky.js`, which
-leans the background toward the pointer, plus a two-line effect switch
-used while choosing the background.
+leans the background toward the pointer.
 
 ## Run and deploy
 
@@ -20,7 +19,6 @@ the Cloudflare dashboard with the "Edit Cloudflare Workers" template).
 
 - `/` — studio, contact
 - `/privacy` — privacy policy for the site and the games
-- `?fx=mist` (default) · `?fx=aurora` · `?fx=off` — background variants
 
 ## Assets
 
