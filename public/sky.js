@@ -19,12 +19,7 @@ if (sky && finePointer && !reducedMotion) {
     leanY += (targetY - leanY) * ease;
     sky.style.setProperty("--lean-x", leanX.toFixed(4));
     sky.style.setProperty("--lean-y", leanY.toFixed(4));
-    sky.style.setProperty("--light-x", `${lightX.toFixed(1)}px`);
-    sky.style.setProperty("--light-y", `${lightY.toFixed(1)}px`);
-    const remaining =
-      Math.abs(targetX - leanX) +
-      Math.abs(targetY - leanY) +
-      (Math.abs(lightTargetX - lightX) + Math.abs(lightTargetY - lightY)) / 100;
+    const remaining = Math.abs(targetX - leanX) + Math.abs(targetY - leanY);
     frame = remaining > 0.002 ? requestAnimationFrame(settle) : 0;
   };
 
