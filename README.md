@@ -1,8 +1,9 @@
 # smoothsoftware.dev
 
 The studio page of Smooth Software: contact and privacy policy. Static
-HTML and CSS, no build step, no JavaScript beyond a two-line effect
-switch used while choosing the background.
+HTML and CSS, no build step. The only JavaScript is `sky.js`, which
+leans the background toward the pointer, plus a two-line effect switch
+used while choosing the background.
 
 ## Run and deploy
 
